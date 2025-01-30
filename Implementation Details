@@ -1,0 +1,16 @@
+I have implemented a Circuit Breaker in our Microservices architecture using Eureka Server for service discovery and RestTemplate for inter-service communication. The Circuit Breaker pattern helps prevent cascading failures by stopping requests to a failing service after a certain threshold.
+
+Implementation Details:
+Service Discovery with Eureka:
+
+Each microservice registers itself with the Eureka Server.
+Services fetch available instances dynamically, ensuring scalability.
+RestTemplate for Inter-Service Communication:
+
+RestTemplate is used to send HTTP requests between microservices.
+Services communicate using URLs fetched from Eureka Server.
+Circuit Breaker with Resilience4j:
+
+Added @CircuitBreaker(name = "serviceName", fallbackMethod = "fallback") to handle failures.
+If a dependent service (e.g., Address Service) becomes unresponsive, the fallback method provides a default response instead of propagating the failure.
+This prevents excessive retries and improves system resilience.
